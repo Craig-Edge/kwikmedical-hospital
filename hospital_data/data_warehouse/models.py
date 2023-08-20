@@ -12,7 +12,6 @@ class Hospital(models.Model):
     hospital_name = models.CharField(max_length=255, blank=False, null=False)
     hospital_location = models.CharField(max_length=100)
     facilities = models.CharField(max_length=255)
-    # specialization = models.CharField(max_length=100)
     
     def __str__(self):
-        return self.name
+        return self.hospital_name
