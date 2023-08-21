@@ -23,6 +23,10 @@ class AmbulanceDispatchViewSet(viewsets.ViewSet):
         
         # Perform ambulance dispatch logic to get response_data
         response_data = choose_hospital(patient_data)
+        
+        current_datetime = datetime.now()
+        current_date = current_datetime.date()
+        current_time = current_datetime.time()
 
         # Create a new DispatchRequest instance and associate it with the chosen hospital
         chosen_hospital_name = response_data[0]
@@ -32,7 +36,9 @@ class AmbulanceDispatchViewSet(viewsets.ViewSet):
             location=location,
             chosen_hospital=chosen_hospital, 
             medical_condition=medical_condition,
-            datetime=datetime.now()
+            datetime=current_datetime,
+            date=current_date,
+            time=current_time
         )
 
         # Serialize the new instance to include in the response
@@ -44,7 +50,8 @@ class AmbulanceDispatchViewSet(viewsets.ViewSet):
             'facilities': response_data[2],
             'dispatch_request': serializer.data,
             'medical_condition': medical_condition,
-            'datetime': dispatch_request.datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+            'date': dispatch_request.date,
+            'time': dispatch_request.time
         })
 
 
