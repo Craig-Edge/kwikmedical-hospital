@@ -13,7 +13,7 @@ class DispatchRequest(models.Model):
     
     nhs_number = models.CharField(max_length=50)
     location = models.CharField(max_length=200)
-    date = models.DateField(default=timezone.now().date())  # Separate field for date
+    date = models.DateField(default=timezone.now().date()) 
     time = models.TimeField(default=timezone.now().time()) 
     datetime = models.DateTimeField(default=timezone.now())
     chosen_hospital = models.CharField(max_length=200)

@@ -1,7 +1,7 @@
 # views.py
 from rest_framework import viewsets
 from rest_framework.response import Response
-from data_warehouse.models import Hospital  # Import the Hospital model
+from data_warehouse.models import Hospital 
 from .models import DispatchRequest
 from .serializers import DispatchRequestSerializer
 from .hospital_selector_logic import choose_hospital
