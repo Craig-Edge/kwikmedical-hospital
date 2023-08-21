@@ -13,6 +13,7 @@ class DispatchRequest(models.Model):
     
     nhs_number = models.CharField(max_length=50)
     location = models.CharField(max_length=200)
+    datetime = models.DateTimeField(auto_now_add=True)
     chosen_hospital = models.CharField(max_length=200)
     medical_condition = models.CharField(max_length=200, null=True)
     dispatch_status = models.CharField(max_length=200, choices=STATUS_CHOICES, default='requested')

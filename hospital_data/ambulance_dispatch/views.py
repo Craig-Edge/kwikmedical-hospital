@@ -5,6 +5,7 @@ from data_warehouse.models import Hospital  # Import the Hospital model
 from .models import DispatchRequest
 from .serializers import DispatchRequestSerializer
 from .hospital_selector_logic import choose_hospital
+from datetime import datetime
 
 class AmbulanceDispatchViewSet(viewsets.ViewSet):
     def create(self, request):
@@ -30,7 +31,8 @@ class AmbulanceDispatchViewSet(viewsets.ViewSet):
             nhs_number=nhs_number,
             location=location,
             chosen_hospital=chosen_hospital, 
-            medical_condition=medical_condition
+            medical_condition=medical_condition,
+            datetime=datetime.now()
         )
 
         # Serialize the new instance to include in the response
@@ -41,7 +43,8 @@ class AmbulanceDispatchViewSet(viewsets.ViewSet):
             'distance': response_data[1],
             'facilities': response_data[2],
             'dispatch_request': serializer.data,
-            'medical_condition': medical_condition
+            'medical_condition': medical_condition,
+            'datetime': dispatch_request.datetime.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
         })
 
 
@@ -53,6 +56,7 @@ class DispatchRequestViewSet(viewsets.ModelViewSet):
         queryset = DispatchRequest.objects.all()
         hospital = self.request.query_params.get('hospital_name')
         dispatch_status = self.request.query_params.get('dispatch_status')
+        queryset = queryset.order_by('datetime')
         if hospital:
             queryset = self.queryset.filter(chosen_hospital=hospital)
         if dispatch_status:
