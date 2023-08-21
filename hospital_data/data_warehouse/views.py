@@ -9,9 +9,6 @@ class HospitalViewSet(viewsets.ModelViewSet):
     queryset = Hospital.objects.all()
     serializer_class = HospitalSerializer
     queryset = queryset.order_by('hospital_name')
-    # filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    # filterset_fields = []
-    # search_fields = []
     
     def get_querset(self):
         queryset = Hospital.objects.all()

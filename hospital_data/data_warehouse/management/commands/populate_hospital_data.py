@@ -28,15 +28,14 @@ class Command(BaseCommand):
     help = 'Populate the hospital database with sample data'
 
     def handle(self, *args, **options):
-        # Delete existing hospital data (optional)
         Hospital.objects.all().delete()
 
-        facility_cycle = cycle(FACILITIES)  # Create a cyclic iterator for facilities
+        facility_cycle = cycle(FACILITIES) 
 
         # Loop to create hospitals
         for hospital_name in hospital_names:
-            facility = next(facility_cycle)  # Get the next facility from the cycle
-            hospital_location = generate_random_coordinates()  # Generate random coordinates
+            facility = next(facility_cycle)  
+            hospital_location = generate_random_coordinates()  
 
             # Create the hospital record
             Hospital.objects.create(

@@ -53,13 +53,3 @@ def choose_hospital(patient_data):
         return best_hospital.hospital_name, float("{:.2f}".format(best_distance)), best_hospital.facilities
     else:
         return "No suitable hospital found"
-
-# # Example patient data
-# patient_data = {
-#     'severity': 'serious',
-#     'medical_condition': 'head',
-#     'location': (60.85, -5.25)  # Example GPS coordinates
-# }
-
-# chosen_hospital = choose_hospital(patient_data)
-# print("Chosen Hospital:", chosen_hospital)
